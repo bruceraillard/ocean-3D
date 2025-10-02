@@ -9,8 +9,8 @@ export const useOceanStore = defineStore('ocean', {
         error: null,
         // Filtres par défaut = ceux de ta requête initiale
         filters: {
-            campagne: '2024',
-            site: 'Ouegoa',
+            campagne: null,
+            site: null,
             station: null,
             transect: null,
             type_poissons: null,

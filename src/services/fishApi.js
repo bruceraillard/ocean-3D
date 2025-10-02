@@ -1,4 +1,4 @@
-const BASE = '/api/nc/api/explore/v2.1/catalog/datasets/rorc_poissons_recifaux/records'
+const BASE = 'https://data.gouv.nc/api/explore/v2.1/catalog/datasets/rorc_poissons_recifaux/records'
 
 /**
  * Charge des enregistrements depuis data.gouv.nc
@@ -13,8 +13,8 @@ const BASE = '/api/nc/api/explore/v2.1/catalog/datasets/rorc_poissons_recifaux/r
  */
 export async function fetchFishRecords(params = {}) {
     const {
-        campagne = '2024',
-        site = 'Ouegoa',
+        campagne = null,
+        site = null,
         station = null,
         transect = null,
         type_poissons = null,
@@ -22,7 +22,7 @@ export async function fetchFishRecords(params = {}) {
     } = params
 
     const qs = new URLSearchParams()
-    qs.set('limit', '20')
+    qs.set('limit', '100')
 
     if (campagne) qs.append('refine', `campagne:"${campagne}"`)
     if (site) qs.append('refine', `site:"${site}"`)
