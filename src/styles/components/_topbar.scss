@@ -1,0 +1,140 @@
+/* ===== Topbar: responsive, wrap-friendly ===== */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+
+  /* Grid = plus robuste que flex pour les bascules de layout */
+  display: grid;
+  grid-template-columns: 1fr auto; /* brand | actions */
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px 16px;
+  margin: 8px 16px 0;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  -webkit-backdrop-filter: var(--blur);
+  backdrop-filter: var(--blur);
+  box-shadow: var(--shadow);
+}
+
+/* ===== Brand: ellipses pour éviter la casse sur mobile ===== */
+.brand {
+  font-weight: 700;
+  letter-spacing: .3px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  min-width: 0; /* autorise l’ellipsis */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.brand .dot {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--brand);
+  box-shadow: 0 0 14px var(--brand);
+}
+
+/* ===== Actions: rangée fluide, peut passer à la ligne ===== */
+.actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  /* Laisser la zone actions prendre la place dispo */
+  justify-self: end;
+  min-width: 0;
+  flex-wrap: wrap; /* permet au bouton de passer dessous si trop étroit */
+}
+
+/* ===== Search: s’étire intelligemment ===== */
+.search {
+  height: 36px;
+  border-radius: 10px;
+  padding: 0 12px;
+
+  /* S’étire, mais garde une largeur max confortable */
+  flex: 1 1 240px; /* base 240px, peut grandir ou rétrécir */
+  min-width: 140px; /* évite de devenir ridicule */
+  max-width: 520px; /* évite de devenir trop large sur desktop */
+  width: 100%; /* pour les cas où elle est seule en ligne */
+
+  background: #0b1d2b;
+  border: 1px solid var(--border);
+  color: var(--text);
+  outline: none;
+}
+
+.search:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(98, 211, 255, .15);
+}
+
+/* ===== Button ===== */
+.btn {
+  height: 36px;
+  border-radius: 10px;
+  padding: 0 12px;
+  border: 1px solid #15405c;
+  background: linear-gradient(180deg, #10324b, #0b2538);
+  color: #bfefff;
+  cursor: pointer;
+  white-space: nowrap; /* évite le retour à la ligne sur le label */
+}
+
+.btn:hover {
+  filter: brightness(1.06);
+}
+
+/* ===== Breakpoints ===== */
+
+/* <= 900px : on autorise le regroupement et plus d’espace pour le champ */
+@media (max-width: 900px) {
+  .topbar {
+    grid-template-columns: 1fr; /* brand au-dessus, actions en-dessous */
+  }
+  .actions {
+    justify-self: stretch; /* occupe toute la largeur */
+  }
+  .search {
+    max-width: none; /* prend toute la ligne */
+    flex: 1 1 100%;
+  }
+  .btn {
+    flex: 0 0 auto; /* reste à droite si la place le permet */
+  }
+}
+
+/* <= 520px : on force le bouton sous la barre de recherche */
+@media (max-width: 520px) {
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .search {
+    width: 100%;
+  }
+  .btn {
+    width: 100%; /* bouton pleine largeur pour le confort tactile */
+  }
+  .brand {
+    font-size: 14px; /* légère réduction pour tenir sur une ligne */
+  }
+}
+
+
+@media (max-width: 360px) {
+  .topbar {
+    padding: 10px 12px;
+    margin: 6px 12px 0;
+    gap: 10px;
+  }
+}

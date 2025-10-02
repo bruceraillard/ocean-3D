@@ -1,0 +1,27 @@
+.filters h2, .panel h2 {
+  position: sticky;
+  top: 0;
+  padding: 4px 0 8px;
+  margin: 6px 0 10px;
+  font-size: 16px;
+  color: #dff7ff;
+  z-index: 1;
+  background: transparent;
+}
+
+.panel .muted {
+  color: #8db1c0;
+  font-size: 14px;
+}
+
+.panel .mini {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  font-size: 14px;
+  color: #dff7ff;
+}
+
+.panel .mini li + li {
+  margin-top: 4px;
+}

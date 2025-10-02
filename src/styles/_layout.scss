@@ -1,0 +1,36 @@
+.layout {
+  display: grid;
+  grid-template-columns: 280px 1fr 320px;
+  gap: 16px;
+  min-height: 70vh;
+}
+
+.sidebar, .panel, .canvas {
+  background: var(--panel);
+  backdrop-filter: var(--blur);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+  box-shadow: var(--shadow);
+}
+
+.canvas {
+  padding: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 960px) {
+  .layout {
+    grid-template-columns:1fr;
+  }
+  .panel {
+    order: 3;
+  }
+  .sidebar {
+    order: 1;
+  }
+  .canvas {
+    order: 2;
+    min-height: 60vh;
+  }
+}
